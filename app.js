@@ -11,7 +11,7 @@ var database = app.database();
 
 // var database = firebase.database();
 
-// setInterval(function(){
+setInterval(function(){
 var x;
 var i;
 var countryArray = [];
@@ -123,7 +123,7 @@ request("https://covid19.mathdro.id/api/countries/", {
 });
 
 
-// }, 10*1000);
+}, 10*1000);
 
 
 
