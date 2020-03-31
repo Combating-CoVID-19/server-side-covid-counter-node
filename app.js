@@ -114,3 +114,4 @@ function writeCovidData(country, confirmedCases, recoveredCases, deathCases){
         Deaths: deathCases
     });
 }
+//ee
