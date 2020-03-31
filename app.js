@@ -12,4 +12,4 @@ request("https://pomber.github.io/covid19/timeseries.json", { json: true }, (err
   console.log(body.id);
   console.log(body.title);
 });
-}, 10*1000);
+}, 600*1000);
