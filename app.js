@@ -11,7 +11,7 @@ var database = app.database();
 
 // var database = firebase.database();
 
-setInterval(function(){
+// setInterval(function(){
 var x;
 var i;
 var countryArray = [];
@@ -21,6 +21,8 @@ var currentCountry;
 var e;
 var totalConfirmed;
 var newCases;
+var totalDeaths;
+var totalRecovered;
 request("https://covid19.mathdro.id/api/countries/", {
     json: true
 }, (err, res, body) => {
@@ -35,13 +37,14 @@ request("https://covid19.mathdro.id/api/countries/", {
         countryArray.push(currentCountryName);
 
     }
-console.log(countryArray);
+// console.log(countryArray);
 
-
+    
     //THIS LOOP IS TO GET THE TOTAL CONFIRMED CASES PER COUNTRY
     var confirmed = null;
     var x = 0;
     veryEpic();
+    var totalRecovered = 0;
     function veryEpic() {
     if(countryArray.length > x){
         currentCountry = countryArray[x];
@@ -61,6 +64,7 @@ console.log(countryArray);
           } else {
           var confirmed = body.confirmed.value;
           var recovered = body.recovered.value;
+          totalRecovered += body.recovered.value;
           var deaths = body.deaths.value;
           didEpicHappen();
             function didEpicHappen() {
@@ -70,7 +74,7 @@ console.log(countryArray);
                   
                   database.ref('CoVIDdata/' + currentCountry).set({
                         Country: currentCountry,
-                        Confirmed: "epic"+confirmed,
+                        Confirmed: confirmed,
                         Recovered: recovered,
                         Deaths: deaths
                     });
@@ -88,6 +92,28 @@ console.log(countryArray);
         });
 
     } else {
+        request("https://covid19.mathdro.id/api/daily", {
+    json: true
+}, (err, res, body) => {
+    if (err) {
+        return console.log(err);
+    }
+
+    // console.log(body.countries)
+console.log(totalRecovered)
+        var totals = 'Totals'
+        console.log(body[(body.length)-1].totalConfirmed)
+        totalConfirmed = body[(body.length)-1].totalConfirmed;
+        
+        totalDeaths = body[(body.length)-1].deaths.total;
+        console.log(totalDeaths)
+        database.ref('CoVIDdata/' + totals).set({
+            Confirmed: totalConfirmed,
+            Recovered: totalRecovered,
+            Deaths: totalDeaths
+        });
+
+});
       console.log('done');
     }
 
@@ -95,7 +121,7 @@ console.log(countryArray);
 });
 
 
-}, 10*1000);
+// }, 10*1000);
 
 
 
