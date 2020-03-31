@@ -2,16 +2,16 @@ const request = require('request')
 const admin = require('firebase-admin');
 
 
-// var app = admin.initializeApp({
-//     credential: admin.credential.applicationDefault(),
-//     databaseURL: 'https://combating-covid-19.firebaseio.com'
-// });
+var app = admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    databaseURL: 'https://combating-covid-19.firebaseio.com'
+});
 
-// var database = app.database();
+var database = app.database();
 
 // var database = firebase.database();
 
-// setInterval(function(){
+setInterval(function(){
 var x;
 var i;
 var countryArray = [];
@@ -60,18 +60,21 @@ console.log(countryArray);
             veryEpic();
           } else {
           var confirmed = body.confirmed.value;
+          var recovered = body.recovered.value;
+          var deaths = body.deaths.value;
           didEpicHappen();
             function didEpicHappen() {
                 if(confirmed == null) {
                     didEpicHappen();
                 } else {
-                  confirmed = null;
-                  // database.ref('CoVIDdata/' + currentCountry).set({
-                  //       Country: currentCountry,
-                  //       Confirmed: confirmed,
-                  //       Recovered: recovered,
-                  //       Deaths: deaths
-                  //   });
+                  
+                  database.ref('CoVIDdata/' + currentCountry).set({
+                        Country: currentCountry,
+                        Confirmed: "epic"+confirmed,
+                        Recovered: recovered,
+                        Deaths: deaths
+                    });
+                    confirmed = null;
                   x++;
                   veryEpic();
                 }
@@ -92,7 +95,7 @@ console.log(countryArray);
 });
 
 
-// }, 10*1000);
+}, 10*1000);
 
 
 
