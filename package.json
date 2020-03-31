@@ -2,8 +2,6 @@
   "dependencies": {
     "firebase-admin": "^8.10.0",
     "request": "^2.88.2"
-  },
-  "scripts": {
-    "start": "app.js"
-}
+  }
+
 }
