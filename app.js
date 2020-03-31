@@ -37,87 +37,89 @@ request("https://covid19.mathdro.id/api/countries/", {
         countryArray.push(currentCountryName);
 
     }
-// console.log(countryArray);
+    // console.log(countryArray);
 
-    
+
     //THIS LOOP IS TO GET THE TOTAL CONFIRMED CASES PER COUNTRY
     var confirmed = null;
     var x = 0;
     veryEpic();
     var totalRecovered = 0;
+
     function veryEpic() {
-    if(countryArray.length > x){
-        currentCountry = countryArray[x];
+        if (countryArray.length > x) {
+            currentCountry = countryArray[x];
 
-        var url = 'https://covid19.mathdro.id/api/countries/'+currentCountry;
+            var url = 'https://covid19.mathdro.id/api/countries/' + currentCountry;
 
-        request(url, {
-            json: true
-        }, (err, res, body) => {
-            // console.log('running');
-            if (err) {
-                return console.log(err)
-            }
-          if(body.confirmed == undefined) {
-            x++
-            veryEpic();
-          } else {
-          var confirmed = body.confirmed.value;
-          var recovered = body.recovered.value;
-          totalRecovered += body.recovered.value;
-          var deaths = body.deaths.value;
-          didEpicHappen();
-            function didEpicHappen() {
-                if(confirmed == null) {
-                    didEpicHappen();
-                } else {
-                  
-                  database.ref('CoVIDdata/' + currentCountry).set({
-                        Country: currentCountry,
-                        Confirmed: confirmed,
-                        Recovered: recovered,
-                        Deaths: deaths
-                    });
-                    confirmed = null;
-                  x++;
-                  veryEpic();
+            request(url, {
+                json: true
+            }, (err, res, body) => {
+                // console.log('running');
+                if (err) {
+                    return console.log(err)
                 }
-            }
-          }
+                if (body.confirmed == undefined) {
+                    x++
+                    veryEpic();
+                } else {
+                    var confirmed = body.confirmed.value;
+                    var recovered = body.recovered.value;
+                    totalRecovered += body.recovered.value;
+                    var deaths = body.deaths.value;
+                    didEpicHappen();
+
+                    function didEpicHappen() {
+                        if (confirmed == null) {
+                            didEpicHappen();
+                        } else {
+
+                            database.ref('CoVIDdata/' + currentCountry).set({
+                                Country: currentCountry,
+                                Confirmed: confirmed,
+                                Recovered: recovered,
+                                Deaths: deaths
+                            });
+                            confirmed = null;
+                            x++;
+                            veryEpic();
+                        }
+                    }
+                }
 
 
 
 
 
-        });
+            });
 
-    } else {
-        request("https://covid19.mathdro.id/api/daily", {
-    json: true
-}, (err, res, body) => {
-    if (err) {
-        return console.log(err);
+        } else {
+            request("https://covid19.mathdro.id/api/daily", {
+                json: true
+            }, (err, res, body) => {
+                if (err) {
+                    return console.log(err);
+                }
+
+                // console.log(body.countries)
+                console.log(totalRecovered)
+                var totals = 'Totals'
+                console.log(body[(body.length) - 1].totalConfirmed)
+                totalConfirmed = body[(body.length) - 1].totalConfirmed;
+
+                totalDeaths = body[(body.length) - 1].deaths.total;
+                console.log(totalDeaths)
+                database.ref('CoVIDdata/' + totals).set({
+                    Confirmed: totalConfirmed,
+                    Recovered: totalRecovered,
+                    Deaths: totalDeaths
+                });
+
+            });
+            console.log('done');
+        }
+
     }
-
-    // console.log(body.countries)
-console.log(totalRecovered)
-        var totals = 'Totals'
-        console.log(body[(body.length)-1].totalConfirmed)
-        totalConfirmed = body[(body.length)-1].totalConfirmed;
-        
-        totalDeaths = body[(body.length)-1].deaths.total;
-        console.log(totalDeaths)
-        database.ref('CoVIDdata/' + totals).set({
-            Confirmed: totalConfirmed,
-            Recovered: totalRecovered,
-            Deaths: totalDeaths
-        });
-
-});
-      console.log('done');
-    }
-
-}
 });
 
 
@@ -125,7 +127,7 @@ console.log(totalRecovered)
 
 
 
-function writeCovidData(country, confirmedCases, recoveredCases, deathCases){
+function writeCovidData(country, confirmedCases, recoveredCases, deathCases) {
     database.ref('CoVIDdata/' + country).set({
         Country: country,
         Confirmed: confirmedCases,
