@@ -65,7 +65,7 @@ request("https://covid19.mathdro.id/api/countries/", {
                 } else {
                     var confirmed = body.confirmed.value;
                     var recovered = body.recovered.value;
-                    totalRecovered += body.recovered.value;
+                    // totalRecovered += body.recovered.value;
                     var deaths = body.deaths.value;
                     didEpicHappen();
 
@@ -94,7 +94,7 @@ request("https://covid19.mathdro.id/api/countries/", {
             });
 
         } else {
-            request("https://covid19.mathdro.id/api/daily", {
+            request("https://covid19.mathdro.id/api", {
                 json: true
             }, (err, res, body) => {
                 if (err) {
@@ -104,10 +104,10 @@ request("https://covid19.mathdro.id/api/countries/", {
                 // console.log(body.countries)
                 console.log(totalRecovered)
                 var totals = 'Totals'
-                console.log(body[(body.length) - 1].totalConfirmed)
-                totalConfirmed = body[(body.length) - 1].totalConfirmed;
-
-                totalDeaths = body[(body.length) - 1].deaths.total;
+                console.log(body.confirmed.value)
+                totalConfirmed = body.confirmed.value;
+                totalRecovered = body.recovered.value;
+                totalDeaths = body.deaths.value;
                 console.log(totalDeaths)
                 database.ref('CoVIDdata/' + totals).set({
                     Confirmed: totalConfirmed,
@@ -128,7 +128,7 @@ request("https://covid19.mathdro.id/api/countries/", {
 
 
 function writeCovidData(country, confirmedCases, recoveredCases, deathCases) {
-    database.ref('CoVIDdata/' + country).set({
+    database.ref('CoVIDdata/' + country).update({
         Country: country,
         Confirmed: confirmedCases,
         Recovered: recoveredCases,
