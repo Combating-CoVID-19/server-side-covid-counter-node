@@ -132,7 +132,7 @@ request("https://covid19.mathdro.id/api/countries/", {
                     Confirmed: totalConfirmed,
                     Recovered: totalRecovered,
                     Deaths: totalDeaths,
-                    Deathrate: (totalDeaths/totalConfirmed)
+                    Deathrate: ((totalDeaths/totalConfirmed)*100)
                 });
 
             });
