@@ -98,7 +98,8 @@ request("https://covid19.mathdro.id/api/countries/", {
                                 Confirmed: confirmed,
                                 Recovered: recovered,
                                 Deaths: deaths,
-                                Deathrate: ((deaths/confirmed)*100)
+                                Deathrate: (((deaths/confirmed)*100).toFixed(8)),
+                                DeathrateRounded: (((deaths/confirmed)*100).toFixed(2))
                             });
                             confirmed = null;
                             x++;
@@ -133,7 +134,8 @@ request("https://covid19.mathdro.id/api/countries/", {
                     Confirmed: totalConfirmed,
                     Recovered: totalRecovered,
                     Deaths: totalDeaths,
-                    Deathrate: ((totalDeaths/totalConfirmed)*100)
+                    Deathrate: (((totalDeaths/totalConfirmed)*100).toFixed(8)),
+                    DeathrateRounded: (((totalDeaths/totalConfirmed)*100).toFixed(2))
                 });
 
             });
