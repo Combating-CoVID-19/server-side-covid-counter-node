@@ -97,7 +97,8 @@ request("https://covid19.mathdro.id/api/countries/", {
                                 Country: currentCountry,
                                 Confirmed: confirmed,
                                 Recovered: recovered,
-                                Deaths: deaths
+                                Deaths: deaths,
+                                Deathrate: ((deaths/confirmed)*100)
                             });
                             confirmed = null;
                             x++;
