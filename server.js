@@ -36,7 +36,16 @@ request("https://covid19.mathdro.id/api/countries/", {
         var currentCountryName = body.countries[i].name
         countryArray.push(currentCountryName);
 
+
     }
+    database.ref('CoVIDdata/countryArray').set({
+        Countries: countryArray 
+    });
+    // database.ref('CoVIDdata/countryArray').once('value').then(function(snapshot) {
+    //     var Array = (snapshot.val().Countries);
+    //     console.log(Array)
+    //     // ...
+    //   });
     // console.log(countryArray);
 
 
