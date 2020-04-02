@@ -131,7 +131,8 @@ request("https://covid19.mathdro.id/api/countries/", {
                 database.ref('CoVIDdata/' + totals).set({
                     Confirmed: totalConfirmed,
                     Recovered: totalRecovered,
-                    Deaths: totalDeaths
+                    Deaths: totalDeaths,
+                    Deathrate: (totalDeaths/totalConfirmed)
                 });
 
             });
