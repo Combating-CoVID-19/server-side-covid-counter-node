@@ -78,9 +78,25 @@ request("https://covid19.mathdro.id/api/countries/", {
                 if (err) {
                     return console.log(err)
                 }
-                if (body.confirmed == undefined) {
-                    x++
-                    veryEpic();
+                if (body.confirmed == undefined || body.recovered == undefined || body.deaths == undefined) {
+                    
+                    if(body.confirmed == undefined){
+                        var confirmed = "NA"
+                    }  if(body.recovered == undefined){
+                        var recovered = "NA"
+                    } if(body.deaths == undefined) {
+                        var deaths = "NA"
+                    }
+                    database.ref('CoVIDdata/' + currentCountry).set({
+                        Country: currentCountry,
+                        Confirmed: "NA",
+                        Recovered: "NA",
+                        Deaths: deaths,
+                        Deathrate: "NA",
+                        DeathrateRounded: "NA"
+                    });          
+                    
+                    
                 } else {
                     var confirmed = body.confirmed.value;
                     var recovered = body.recovered.value;
