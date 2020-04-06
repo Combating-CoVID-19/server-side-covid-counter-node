@@ -1,9 +1,9 @@
 const request = require('request')
 const admin = require('firebase-admin');
-
+const config = require('./config/')
 
 var app = admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
+    credential: admin.credential.cert(config),
     databaseURL: 'https://combating-covid-19.firebaseio.com'
 });
 
