@@ -79,7 +79,7 @@ request("https://covid19.mathdro.id/api/countries/", {
                     return console.log(err)
                 }
                 if (body.confirmed == undefined || body.recovered == undefined || body.deaths == undefined) {
-                    
+                    console.log('undefined')
                     if(body.confirmed == undefined){
                         var confirmed = "NA"
                     }  if(body.recovered == undefined){
@@ -95,13 +95,16 @@ request("https://covid19.mathdro.id/api/countries/", {
                         Deathrate: "NA",
                         DeathrateRounded: "NA"
                     });          
-                    
-                    
+                    x++
+                    veryEpic()
                 } else {
                     var confirmed = body.confirmed.value;
                     var recovered = body.recovered.value;
                     // totalRecovered += body.recovered.value;
                     var deaths = body.deaths.value;
+                    // console.log('doing work')
+
+                    console.log(x)
                     didEpicHappen();
 
                     function didEpicHappen() {
