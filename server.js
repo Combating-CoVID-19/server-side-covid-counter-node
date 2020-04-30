@@ -22,7 +22,7 @@ console.log('Adding Data in 10 Minutes')
 //     console.log(username)
 //     // ...
 //   });
-setInterval(function(){
+// setInterval(function(){
 
 var x;
 var i;
@@ -267,7 +267,7 @@ function getCovidNews(){
 
 console.log('Adding Data in 10 Minutes')
 
-}, 60*1000*10);
+// }, 60*1000*10);
 
 
 
