@@ -170,7 +170,7 @@ request("https://covid19.mathdro.id/api/countries/", {
 getCovidNews()
 function getCovidNews(){
     var x = 0;
-    request("http://newsapi.org/v2/everything?q=coronavirus&sortBy=relevancy&language=en&apiKey=c82e65fa2c7b4873827205508123e2db", {
+    request("http://newsapi.org/v2/everything?q=coronavirus&sortBy=publishedAt&language=en&apiKey=c82e65fa2c7b4873827205508123e2db", {
         json: true
     }, (err, res, body) => {
         if (err) {
@@ -188,7 +188,7 @@ function getCovidNews(){
                 var url = body.articles[x].url;
                 var urlToImage = body.articles[x].urlToImage;
                 var publishDate = body.articles[x].publishedAt;
-                publishDate = publishedDate.substring(0, 9);
+                publishDate = publishDate.substring(0, 10);
                 var content = body.articles[x].content;
                 console.log(title)
                 if(sourceID == null || sourceID == undefined){
@@ -237,7 +237,7 @@ function getCovidNews(){
                 if(title == "undefined" || title == null){
                
                 } else {
-                database.ref('News/' + finalPath).set({
+                database.ref('News/').push({
                 SourceID: sourceID,
                 SourceName: sourceName,
                 Author: author,
