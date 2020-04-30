@@ -187,7 +187,7 @@ function getCovidNews(){
                 var description = body.articles[x].description;
                 var url = body.articles[x].url;
                 var urlToImage = body.articles[x].urlToImage;
-                var publishDate = body.articles[x].publishedAt.substring(0, 9);;
+                var publishDate = body.articles[x].publishedAt.substring(0, 9);
                 var content = body.articles[x].content;
                 console.log(title)
                 if(sourceID == null || sourceID == undefined){
