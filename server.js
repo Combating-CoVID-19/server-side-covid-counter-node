@@ -233,6 +233,10 @@ function getCovidNews(){
                 // var earlyPath5 = earlyPath4.split('[')
                 // var finalPath = earlyPath5.split(']')
                 // console.log(body.articles[x].author)
+
+                if(title == "undefined" || title == null){
+               
+                } else {
                 database.ref('News/' + finalPath).set({
                 SourceID: sourceID,
                 SourceName: sourceName,
@@ -246,7 +250,7 @@ function getCovidNews(){
 
 
                 });
-
+            }
                 x++;
                 addNewsData()
             }
