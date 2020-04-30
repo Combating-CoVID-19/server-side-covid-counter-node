@@ -51,7 +51,7 @@ request("https://covid19.mathdro.id/api/countries/", {
 
     }
     database.ref('CoVIDdata/countryArray').set({
-        Countries: countryArray 
+        Countries: countryArray
     });
     // database.ref('CoVIDdata/countryArray').once('value').then(function(snapshot) {
     //     var Array = (snapshot.val().Countries);
@@ -96,7 +96,7 @@ request("https://covid19.mathdro.id/api/countries/", {
                         Deaths: deaths,
                         Deathrate: null,
                         DeathrateRounded: null
-                    });          
+                    });
                     x++
                     veryEpic()
                 } else {
@@ -187,7 +187,7 @@ function getCovidNews(){
                 var description = body.articles[x].description;
                 var url = body.articles[x].url;
                 var urlToImage = body.articles[x].urlToImage;
-                var publishDate = body.articles[x].publishedAt;
+                var publishDate = body.articles[x].publishedAt.substring(0, 9);;
                 var content = body.articles[x].content;
                 console.log(title)
                 if(sourceID == null || sourceID == undefined){
@@ -223,8 +223,8 @@ function getCovidNews(){
                 var earlyPath4 = earlyPath3.replace('[', '')
                 var earlyPath5 = earlyPath4.replace('.','')
                 var finalPath = earlyPath5.replace(']', '')
-                
-            
+
+
                 // console.log(finalPath)
                 // var earlyPath2 = earlyPath.split('.')
                 // var earlyPath3 = earlyPath2.split('#')
@@ -242,15 +242,15 @@ function getCovidNews(){
                 URLToImage: urlToImage,
                 PublishDate: publishDate,
                 Content: content
-                
-                
+
+
                 });
 
                 x++;
                 addNewsData()
             }
         }
-        
+
         //     Confirmed: totalConfirmed,
         //     Recovered: totalRecovered,
         //     Deaths: totalDeaths,
@@ -258,7 +258,7 @@ function getCovidNews(){
         //     DeathrateRounded: (((totalDeaths/totalConfirmed)*100).toFixed(2))
         });
 
- 
+
 }
 
 console.log('Adding Data in 10 Minutes')
