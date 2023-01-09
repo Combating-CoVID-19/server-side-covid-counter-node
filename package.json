@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^11.4.1",
     "request": "^2.88.2"
   }
 
